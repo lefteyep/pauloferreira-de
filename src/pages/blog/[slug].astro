@@ -14,6 +14,44 @@ export function getStaticPaths() {
 
 const { post } = Astro.props;
 
+const breadcrumbs = [
+  { name: 'Startseite', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: post.title, url: `/blog/${post.slug}` },
+];
+
+// Article JSON-LD schema
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.excerpt,
+  image: `https://pauloferreira.de${post.detailImage}`,
+  datePublished: post.dateISO,
+  dateModified: post.dateISO,
+  author: {
+    '@type': 'Person',
+    name: post.author,
+    url: 'https://pauloferreira.de',
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Paulo Ferreira',
+    url: 'https://pauloferreira.de',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://pauloferreira.de/images/logo.svg',
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://pauloferreira.de/blog/${post.slug}`,
+  },
+  keywords: post.tags.join(', '),
+  wordCount: post.content.split(/\s+/).length,
+  inLanguage: 'en',
+};
+
 // Simple markdown-like rendering
 function renderContent(content: string) {
   return content
@@ -33,13 +71,52 @@ function renderContent(content: string) {
 }
 ---
 
-<Layout title={`${post.title} - Paulo Ferreira`}>
+<Layout
+  title={`${post.title} - Paulo Ferreira`}
+  description={post.excerpt}
+  ogType="article"
+  ogImage={post.detailImage}
+  article={{
+    publishedTime: post.dateISO,
+    modifiedTime: post.dateISO,
+    author: post.author,
+    section: 'Web Design',
+    tags: post.tags,
+  }}
+  breadcrumbs={breadcrumbs}
+  jsonLd={articleSchema}
+>
   <Navbar />
-  <main class="pt-28 pb-12 px-6">
-    <article class="max-w-3xl mx-auto">
+  <main id="main-content" class="pt-28 pb-12 px-6">
+    <article class="max-w-3xl mx-auto" itemscope itemtype="https://schema.org/Article">
+      <!-- Breadcrumb navigation -->
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+          {breadcrumbs.map((crumb, i) => (
+            <li class="flex items-center gap-2">
+              {i > 0 && <span aria-hidden="true">/</span>}
+              {i === breadcrumbs.length - 1 ? (
+                <span aria-current="page" class="text-[var(--color-text-secondary)] line-clamp-1">{crumb.name}</span>
+              ) : (
+                <a href={crumb.url} class="hover:text-white transition-colors whitespace-nowrap">{crumb.name}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
       <div class="reveal">
-        <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">{post.title}</h1>
-        <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">{post.excerpt}</p>
+        <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4" itemprop="headline">{post.title}</h1>
+        <div class="flex items-center gap-4 mb-6 text-sm text-[var(--color-text-muted)]">
+          <time datetime={post.dateISO} itemprop="datePublished">{post.date}</time>
+          <span aria-hidden="true">&middot;</span>
+          <span>{post.readingTime} Min. Lesezeit</span>
+          <span aria-hidden="true">&middot;</span>
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="name">{post.author}</span>
+          </span>
+        </div>
+        <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8" itemprop="description">{post.excerpt}</p>
       </div>
 
       <div class="glass-card overflow-hidden mb-12 reveal" data-delay="200">
@@ -47,21 +124,32 @@ function renderContent(content: string) {
           src={post.detailImage}
           alt={post.title}
           class="w-full aspect-video object-cover"
+          width="768"
+          height="432"
           loading="eager"
+          fetchpriority="high"
+          itemprop="image"
         />
       </div>
 
-      <div class="prose-custom reveal" data-delay="300" set:html={renderContent(post.content)} />
+      <div class="prose-custom reveal" data-delay="300" set:html={renderContent(post.content)} itemprop="articleBody" />
 
-      <div class="mt-16 pt-8 border-t border-white/10">
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mt-8 pt-6 border-t border-white/10">
+        {post.tags.map(tag => (
+          <span class="pill text-xs">{tag}</span>
+        ))}
+      </div>
+
+      <div class="mt-10 pt-8 border-t border-white/10">
         <a
           href="/blog"
           class="btn-primary inline-flex items-center gap-2 px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white/5"
         >
-          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
-          Back to Blog
+          Zurück zum Blog
         </a>
       </div>
     </article>

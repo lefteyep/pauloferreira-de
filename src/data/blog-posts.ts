@@ -2,10 +2,14 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  dateISO: string;
   image: string;
   detailImage: string;
   excerpt: string;
   content: string;
+  author: string;
+  readingTime: number;
+  tags: string[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -13,8 +17,12 @@ export const blogPosts: BlogPost[] = [
     slug: 'benefits-of-free-framer-templates',
     title: 'The Benefits of Using Free Framer Templates',
     date: 'Sep 5, 2023',
+    dateISO: '2023-09-05',
     image: '/images/blog-1.jpg',
     detailImage: '/images/blog-detail-1.png',
+    author: 'Paulo Ferreira',
+    readingTime: 4,
+    tags: ['Framer', 'Web Design', 'Templates'],
     excerpt: 'In today\'s digital age, having a stunning and functional website is crucial for businesses and individuals alike.',
     content: `In today's digital age, having a stunning and functional website is crucial for businesses and individuals alike. One of the most effective ways to achieve this is by using Framer templates. These templates offer a wide range of designs and features that can elevate your website's look and feel.
 
@@ -40,8 +48,12 @@ The best approach is to browse through available templates, find one that closel
     slug: 'customize-framer-templates',
     title: 'How to Customize Free Framer Templates to Fit Your Brand',
     date: 'Sep 4, 2023',
+    dateISO: '2023-09-04',
     image: '/images/blog-2.jpg',
     detailImage: '/images/blog-detail-2.png',
+    author: 'Paulo Ferreira',
+    readingTime: 3,
+    tags: ['Branding', 'Framer', 'Customization'],
     excerpt: 'Learn the essential techniques for transforming a template into a unique representation of your brand.',
     content: `Customizing a template is where the real magic happens. While templates provide an excellent starting point, the true value comes from making them your own. Here's how to transform a generic template into a unique representation of your brand.
 
@@ -67,8 +79,12 @@ For those comfortable with code, consider adding custom animations, interactive 
     slug: 'top-5-framer-templates-startups',
     title: 'Top 5 Free Framer Templates for Startups',
     date: 'Sep 3, 2023',
+    dateISO: '2023-09-03',
     image: '/images/blog-3.jpg',
     detailImage: '/images/blog-detail-3.png',
+    author: 'Paulo Ferreira',
+    readingTime: 3,
+    tags: ['Startups', 'Framer', 'Templates'],
     excerpt: 'Discover the best free Framer templates that are perfect for launching your startup website.',
     content: `Choosing the right template for your startup can make all the difference. Here are our top picks for free Framer templates that combine aesthetics with functionality.
 
@@ -96,8 +112,12 @@ Consider your specific needs, target audience, and growth plans. The template sh
     slug: 'choose-right-framer-template',
     title: 'How to Choose the Right Free Framer Template for Your Project',
     date: 'Sep 2, 2023',
+    dateISO: '2023-09-02',
     image: '/images/blog-4.png',
     detailImage: '/images/blog-detail-4.png',
+    author: 'Paulo Ferreira',
+    readingTime: 3,
+    tags: ['Web Design', 'Framer', 'Guide'],
     excerpt: 'A comprehensive guide to selecting the perfect template that aligns with your project goals.',
     content: `With hundreds of templates available, choosing the right one can feel overwhelming. This guide will help you navigate the selection process and find the perfect match for your project.
 
@@ -121,8 +141,12 @@ The best templates offer a balance between structure and flexibility. You want e
     slug: 'future-of-web-design-framer',
     title: 'The Future of Web Design with Free Framer Templates',
     date: 'Sep 1, 2023',
+    dateISO: '2023-09-01',
     image: '/images/blog-5.png',
     detailImage: '/images/blog-detail-5.png',
+    author: 'Paulo Ferreira',
+    readingTime: 3,
+    tags: ['Web Design', 'Trends', 'No-Code'],
     excerpt: 'Explore how template-based design is shaping the future of web development.',
     content: `The landscape of web design is evolving rapidly, and template-based design is at the forefront of this transformation. Let's explore what the future holds.
 

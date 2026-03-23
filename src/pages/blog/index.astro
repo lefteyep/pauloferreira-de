@@ -3,48 +3,41 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import CTASection from '../../components/CTASection.astro';
 import Footer from '../../components/Footer.astro';
+import { blogPosts } from '../../data/blog-posts';
 
-const posts = [
-  {
-    title: 'The Benefits of Using Free Framer Templates',
-    date: 'Sep 5, 2023',
-    image: '/images/blog-1.jpg',
-    slug: 'benefits-of-free-framer-templates',
-  },
-  {
-    title: 'How to Customize Free Framer Templates to Fit Your Brand',
-    date: 'Sep 4, 2023',
-    image: '/images/blog-2.jpg',
-    slug: 'customize-framer-templates',
-  },
-  {
-    title: 'Top 5 Free Framer Templates for Startups',
-    date: 'Sep 3, 2023',
-    image: '/images/blog-3.jpg',
-    slug: 'top-5-framer-templates-startups',
-  },
-  {
-    title: 'How to Choose the Right Free Framer Template for Your Project',
-    date: 'Sep 2, 2023',
-    image: '/images/blog-4.png',
-    slug: 'choose-right-framer-template',
-  },
-  {
-    title: 'The Future of Web Design with Free Framer Templates',
-    date: 'Sep 1, 2023',
-    image: '/images/blog-5.png',
-    slug: 'future-of-web-design-framer',
-  },
+const breadcrumbs = [
+  { name: 'Startseite', url: '/' },
+  { name: 'Blog', url: '/blog' },
 ];
 ---
 
-<Layout title="Blog - Paulo Ferreira">
+<Layout
+  title="Blog - Paulo Ferreira | Digitales Marketing & Webdesign"
+  description="Aktuelle Beiträge zu Webdesign, Framer Templates, UX/UI Design und digitalem Marketing von Paulo Ferreira."
+  breadcrumbs={breadcrumbs}
+>
   <Navbar />
-  <main class="pt-28 pb-12 px-6">
+  <main id="main-content" class="pt-28 pb-12 px-6">
     <div class="max-w-6xl mx-auto">
+      <!-- Breadcrumb navigation -->
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+          {breadcrumbs.map((crumb, i) => (
+            <li class="flex items-center gap-2">
+              {i > 0 && <span aria-hidden="true">/</span>}
+              {i === breadcrumbs.length - 1 ? (
+                <span aria-current="page" class="text-[var(--color-text-secondary)]">{crumb.name}</span>
+              ) : (
+                <a href={crumb.url} class="hover:text-white transition-colors">{crumb.name}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
       <h1 class="text-3xl font-light text-[var(--color-text-muted)] mb-10 reveal">Blog</h1>
       <div class="flex flex-col">
-        {posts.map((post, i) => (
+        {blogPosts.map((post, i) => (
           <a
             href={`/blog/${post.slug}`}
             class="blog-card flex flex-col sm:flex-row items-start sm:items-center gap-6 py-6 border-b border-white/10 reveal"
@@ -55,12 +48,15 @@ const posts = [
                 src={post.image}
                 alt={post.title}
                 class="w-full h-full object-cover transition-transform duration-500"
+                width="128"
+                height="96"
                 loading="lazy"
               />
             </div>
             <div>
-              <p class="text-sm text-[var(--color-text-muted)] mb-1">{post.date}</p>
+              <time class="text-sm text-[var(--color-text-muted)] mb-1 block" datetime={post.dateISO}>{post.date}</time>
               <h2 class="text-lg font-medium hover:text-white/80 transition-colors">{post.title}</h2>
+              <p class="text-sm text-[var(--color-text-muted)] mt-1">{post.readingTime} Min. Lesezeit</p>
             </div>
           </a>
         ))}
