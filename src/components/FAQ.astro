@@ -1,37 +1,47 @@
 ---
 const faqs = [
   {
-    question: 'What is your design process?',
-    answer: 'My design process involves deep research into the target audience, competitive analysis, wireframing, prototyping, and iterative user testing. I believe in data-driven decisions and close collaboration with stakeholders throughout every phase.',
+    question: 'Wie sieht Ihr Designprozess aus?',
+    answer: 'Mein Designprozess umfasst tiefgehende Zielgruppenanalyse, Wettbewerbsanalyse, Wireframing, Prototyping und iteratives User Testing. Ich setze auf datengetriebene Entscheidungen und enge Zusammenarbeit mit Stakeholdern in jeder Phase.',
   },
   {
-    question: 'What tools and software do you use for UX design?',
-    answer: 'I primarily use Figma for design and prototyping, along with tools like Framer for interactive prototypes, Hotjar for analytics, and various testing platforms. My workflow also includes Notion for documentation and Slack for team communication.',
+    question: 'Welche Tools und Software verwenden Sie?',
+    answer: 'Primär nutze ich Figma für Design und Prototyping, ergänzt durch Framer für interaktive Prototypen, Hotjar für Analytics und verschiedene Testplattformen. Mein Workflow umfasst auch Notion für Dokumentation und Slack für Teamkommunikation.',
   },
   {
-    question: 'How do you measure the success of your UX designs?',
-    answer: 'Success is measured through a combination of quantitative metrics (conversion rates, engagement time, task completion rates) and qualitative feedback (user interviews, satisfaction surveys). I set KPIs at the start of each project and track them throughout.',
+    question: 'Wie messen Sie den Erfolg Ihrer Designs?',
+    answer: 'Erfolg wird durch eine Kombination aus quantitativen Metriken (Conversion-Raten, Engagement-Zeit, Task-Completion-Raten) und qualitativem Feedback (User-Interviews, Zufriedenheitsumfragen) gemessen. KPIs werden zu Beginn jedes Projekts definiert und durchgehend verfolgt.',
+  },
+  {
+    question: 'Was kostet eine Zusammenarbeit?',
+    answer: 'Die Kosten richten sich nach dem Umfang und der Komplexität des Projekts. In einem kostenlosen Erstgespräch analysiere ich Ihre aktuelle Situation und erstelle ein individuelles Angebot. Kontaktieren Sie mich für eine unverbindliche Beratung.',
+  },
+  {
+    question: 'Für welche Branchen arbeiten Sie?',
+    answer: 'Ich bin spezialisiert auf Premium-Ästhetik-Unternehmen wie Schönheitskliniken, Zahnärzte, Medspas und Luxus-Wellness-Anbieter. Meine Strategien sind darauf ausgerichtet, zahlungskräftige Kunden zu gewinnen und den Umsatz nachhaltig zu steigern.',
   },
 ];
 ---
 
 <section id="faq" class="py-20 px-6 reveal">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-10">Frequently asked questions</h2>
-    <div class="flex flex-col">
+    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-10">Häufig gestellte Fragen</h2>
+    <dl class="flex flex-col">
       {faqs.map((faq, i) => (
         <div class="faq-item reveal" data-delay={String(i * 100)}>
-          <button class="faq-trigger w-full flex items-center justify-between py-5 text-left cursor-pointer">
-            <span class="text-lg font-medium pr-8">{faq.question}</span>
-            <svg class="faq-chevron w-5 h-5 flex-shrink-0 text-[var(--color-text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-          <div class="faq-answer">
+          <dt>
+            <button class="faq-trigger w-full flex items-center justify-between py-5 text-left cursor-pointer" aria-expanded="false">
+              <span class="text-lg font-medium pr-8">{faq.question}</span>
+              <svg class="faq-chevron w-5 h-5 flex-shrink-0 text-[var(--color-text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </dt>
+          <dd class="faq-answer">
             <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed pb-2">{faq.answer}</p>
-          </div>
+          </dd>
         </div>
       ))}
-    </div>
+    </dl>
   </div>
 </section>

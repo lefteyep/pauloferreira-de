@@ -2,7 +2,7 @@
 const caseStudies = [
   {
     title: 'Modernizing a Subscription Management Platform',
-    description: 'With user-centered approach, the goals was to create an intuitive interface for effortless financial management while incorporating gamification.',
+    description: 'With a user-centered approach, the goal was to create an intuitive interface for effortless subscription management while incorporating gamification elements.',
     image: '/images/case-study-1.jpg',
     stats: [
       { label: 'Engagement', value: '12', suffix: ' min' },
@@ -11,7 +11,7 @@ const caseStudies = [
   },
   {
     title: 'Revamping an E-Commerce Website',
-    description: 'Focus was to create a user-friendly interface that simplified the process of accessing premium operational web scraping proxies.',
+    description: 'Focus was to create a user-friendly interface that simplified the shopping experience and increased conversion rates through optimized checkout flows.',
     image: '/images/case-study-2.jpg',
     stats: [
       { label: 'Usability', value: '85', suffix: '%' },
@@ -19,8 +19,8 @@ const caseStudies = [
     ],
   },
   {
-    title: 'Developing a Mobile Health Tracking App',
-    description: 'Leading Bitcoin Data and Stats site. Live price action, monitor on-chain data, and track key economic indicators.',
+    title: 'Developing a Fintech Data Dashboard',
+    description: 'Leading data visualization and stats platform. Live price action, real-time on-chain data monitoring, and comprehensive analytics dashboard.',
     image: '/images/case-study-3.jpg',
     stats: [
       { label: 'Conversion Rate', value: '12', suffix: '%' },
@@ -28,8 +28,8 @@ const caseStudies = [
     ],
   },
   {
-    title: 'Optimizing a Corporate Intranet',
-    description: 'An innovative app and approach for taking advantage of unused internet from people\'s devices. It differs from others because of its simplicity, functions, and ways to earn extra money.',
+    title: 'Building a Peer-to-Peer Network App',
+    description: 'An innovative app enabling users to share unused internet bandwidth. Designed for simplicity, powerful functionality, and seamless monetization.',
     image: '/images/case-study-4.jpg',
     stats: [
       { label: 'Conversion Rate', value: '20', suffix: '%' },
@@ -39,10 +39,11 @@ const caseStudies = [
 ];
 ---
 
-<section id="case-study" class="py-20 px-6">
+<section id="case-study" class="py-20 px-6" aria-label="Fallstudien">
   <div class="max-w-6xl mx-auto flex flex-col gap-8">
+    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-2">Lösungen & Projekte</h2>
     {caseStudies.map((study, i) => (
-      <div class="glass-card p-8 md:p-10 reveal" data-delay={String(i * 100)}>
+      <article class="glass-card p-8 md:p-10 reveal" data-delay={String(i * 100)}>
         <div class="flex flex-col md:flex-row gap-8 items-start">
           <div class="flex-1">
             <h3 class="text-2xl md:text-3xl font-semibold mb-4 leading-tight">{study.title}</h3>
@@ -51,8 +52,10 @@ const caseStudies = [
           <div class="flex-1">
             <img
               src={study.image}
-              alt={study.title}
+              alt={`Fallstudie: ${study.title}`}
               class="w-full rounded-lg object-cover aspect-video"
+              width="600"
+              height="338"
               loading="lazy"
             />
             <div class="flex gap-12 mt-6">
@@ -72,7 +75,7 @@ const caseStudies = [
             </div>
           </div>
         </div>
-      </div>
+      </article>
     ))}
   </div>
 </section>
