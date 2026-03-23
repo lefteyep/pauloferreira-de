@@ -12,25 +12,29 @@ const moreSkills = [
 ];
 ---
 
-<section id="skills" class="py-20 px-6 reveal">
+<section id="skills" class="py-20 px-6 reveal" aria-label="Fähigkeiten">
   <div class="max-w-6xl mx-auto">
     <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-8">Skills</h2>
-    <div class="flex flex-wrap gap-3" id="skills-list">
+    <ul class="flex flex-wrap gap-3 list-none p-0" id="skills-list" role="list">
       {skills.map((skill, i) => (
-        <span class="pill reveal" data-delay={String(i * 30)}>{skill}</span>
+        <li class="pill reveal" data-delay={String(i * 30)}>{skill}</li>
       ))}
-      <button
-        id="show-more-skills"
-        class="pill cursor-pointer hover:bg-white/5"
-      >
-        + More
-      </button>
-    </div>
-    <div id="more-skills" class="hidden flex-wrap gap-3 mt-3">
+      <li>
+        <button
+          id="show-more-skills"
+          class="pill cursor-pointer hover:bg-white/5"
+          aria-expanded="false"
+          aria-controls="more-skills"
+        >
+          + Mehr anzeigen
+        </button>
+      </li>
+    </ul>
+    <ul id="more-skills" class="hidden flex-wrap gap-3 mt-3 list-none p-0" role="list">
       {moreSkills.map((skill, i) => (
-        <span class="pill reveal" data-delay={String(i * 30)}>{skill}</span>
+        <li class="pill reveal" data-delay={String(i * 30)}>{skill}</li>
       ))}
-    </div>
+    </ul>
   </div>
 </section>
 
@@ -38,9 +42,11 @@ const moreSkills = [
   const btn = document.getElementById('show-more-skills');
   const more = document.getElementById('more-skills');
   btn?.addEventListener('click', () => {
+    const isHidden = more?.classList.contains('hidden');
     more?.classList.toggle('hidden');
     more?.classList.toggle('flex');
-    if (btn) btn.textContent = more?.classList.contains('hidden') ? '+ More' : '- Less';
+    if (btn) btn.textContent = isHidden ? '- Weniger' : '+ Mehr anzeigen';
+    btn?.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     // Trigger reveal on newly visible items
     more?.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   });
