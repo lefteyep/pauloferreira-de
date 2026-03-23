@@ -12,11 +12,63 @@ import BlogPreview from '../components/BlogPreview.astro';
 import FAQ from '../components/FAQ.astro';
 import CTASection from '../components/CTASection.astro';
 import Footer from '../components/Footer.astro';
+
+// FAQ Schema for homepage
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Wie sieht der Designprozess aus?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Mein Designprozess umfasst tiefgehende Zielgruppenanalyse, Wettbewerbsanalyse, Wireframing, Prototyping und iteratives User Testing. Ich setze auf datengetriebene Entscheidungen und enge Zusammenarbeit mit Stakeholdern in jeder Phase.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Welche Tools und Software werden für UX Design verwendet?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Primär wird Figma für Design und Prototyping verwendet, ergänzt durch Framer für interaktive Prototypen, Hotjar für Analytics und verschiedene Testplattformen. Der Workflow umfasst auch Notion für Dokumentation und Slack für Teamkommunikation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wie wird der Erfolg von UX Designs gemessen?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Erfolg wird durch eine Kombination aus quantitativen Metriken (Conversion-Raten, Engagement-Zeit, Task-Completion-Raten) und qualitativem Feedback (User-Interviews, Zufriedenheitsumfragen) gemessen. KPIs werden zu Beginn jedes Projekts definiert und durchgehend verfolgt.',
+      },
+    },
+  ],
+};
+
+// LocalBusiness / ProfessionalService schema
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Paulo Ferreira - Branding & Marketing',
+  description: 'Datengetriebene Werbekampagnen und hochwertige Websites für Premium-Ästhetik-Unternehmen.',
+  url: 'https://pauloferreira.de',
+  priceRange: '$$',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Germany',
+  },
+  serviceType: ['Digital Marketing', 'Google Ads', 'Meta Ads', 'Webdesign', 'UX/UI Design'],
+  image: 'https://pauloferreira.de/images/hero-portrait.png',
+  founder: {
+    '@type': 'Person',
+    name: 'Paulo Ferreira',
+  },
+};
 ---
 
-<Layout>
+<Layout jsonLd={[faqSchema, serviceSchema]}>
   <Navbar />
-  <main>
+  <main id="main-content">
     <Hero />
     <PartnerLogos />
     <CaseStudies />
