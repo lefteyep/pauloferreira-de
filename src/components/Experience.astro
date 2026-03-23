@@ -2,17 +2,17 @@
 const experiences = [
   { role: 'Design Lead', company: 'Geonode', period: 'Jan 2020 - Jan 2023' },
   { role: 'Lead UX/UI Designer', company: 'Truely', period: 'Jan 2018 - Jan 2020' },
-  { role: 'Senior Product Designer', company: 'Nicey Consulting', period: 'Jun 2016 - Present' },
+  { role: 'Senior Product Designer', company: 'Nicey Consulting', period: 'Jun 2016 - Heute' },
   { role: 'Co-Founder', company: 'BrandingMag', period: 'Jan 2011 - Jun 2015' },
 ];
 ---
 
-<section class="py-20 px-6 reveal">
+<section class="py-20 px-6 reveal" aria-label="Berufserfahrung">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-10">Experience</h2>
-    <div class="flex flex-col">
+    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-10">Erfahrung</h2>
+    <ol class="flex flex-col list-none p-0" role="list">
       {experiences.map((exp, i) => (
-        <div
+        <li
           class="flex flex-col md:flex-row md:items-center justify-between py-6 border-b border-white/10 reveal"
           data-delay={String(i * 100)}
         >
@@ -21,8 +21,8 @@ const experiences = [
             <p class="text-lg md:text-xl font-semibold">{exp.company}</p>
             <p class="text-sm text-[var(--color-text-muted)]">{exp.period}</p>
           </div>
-        </div>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </section>
