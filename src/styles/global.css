@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0a0a0a;
+  --color-bg-card: rgba(15, 23, 35, 0.6);
+  --color-bg-card-hover: rgba(20, 30, 45, 0.8);
+  --color-border-card: rgba(56, 189, 248, 0.08);
+  --color-border-card-hover: rgba(56, 189, 248, 0.15);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-accent-teal: #2d6a6a;
+  --color-accent-glow: rgba(34, 197, 94, 0.08);
+  --color-cta-bg: #3a7c82;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.ambient-glow {
+  position: fixed;
+  top: 30%;
+  right: -10%;
+  width: 600px;
+  height: 800px;
+  background: radial-gradient(ellipse, rgba(34, 197, 94, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-card);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-border-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(56, 189, 248, 0.03);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  transition: all 0.3s ease;
+}
+
+.pill:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--color-text-primary);
+}
+
+.pill-highlight {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  font-size: inherit;
+  color: var(--color-text-primary);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.navbar-glass {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
+}
+
+.navbar-glass.scrolled {
+  background: rgba(10, 10, 10, 0.9);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 300px;
+  padding-bottom: 1.5rem;
+}
+
+.faq-chevron {
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-chevron {
+  transform: rotate(90deg);
+}
+
+.cta-blob {
+  background: linear-gradient(135deg, #2d5a5a 0%, #3a7c82 40%, #2d6a6a 100%);
+  border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+
+@keyframes blobFloat {
+  0%, 100% { border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%; }
+  25% { border-radius: 50% 40% 60% 50% / 40% 60% 50% 50%; }
+  50% { border-radius: 60% 50% 40% 60% / 50% 50% 40% 60%; }
+  75% { border-radius: 40% 50% 60% 40% / 60% 40% 50% 50%; }
+}
+
+.btn-primary {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.blog-card {
+  transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-2px);
+}
+
+.blog-card:hover img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .cta-blob {
+    animation: none;
+  }
+}

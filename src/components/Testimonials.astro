@@ -1,0 +1,39 @@
+---
+const testimonials = [
+  {
+    logo: '/images/perkup-logo.png',
+    alt: 'PerkUp',
+    quote: '"He consistently exceeds our expectations"',
+  },
+  {
+    logo: '/images/s-logo.png',
+    alt: 'S',
+    quote: '"I recommend Goran whole-heartedly"',
+  },
+  {
+    logo: '/images/isms-logo.png',
+    alt: 'ISMS Connect',
+    quote: '"Loved to work with Goran!"',
+  },
+];
+---
+
+<section class="py-20 px-6 relative reveal">
+  <!-- Concentric circle decoration -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+    <div class="w-[500px] h-[500px] rounded-full border border-white/[0.03]"></div>
+    <div class="absolute w-[400px] h-[400px] rounded-full border border-white/[0.04]"></div>
+    <div class="absolute w-[300px] h-[300px] rounded-full border border-white/[0.05]"></div>
+  </div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+      {testimonials.map((t, i) => (
+        <div class="flex flex-col items-center gap-4 reveal" data-delay={String(i * 150)}>
+          <img src={t.logo} alt={t.alt} class="h-10 w-auto brightness-0 invert opacity-90" loading="lazy" />
+          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{t.quote}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

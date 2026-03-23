@@ -1,0 +1,47 @@
+---
+const skills = [
+  'UX Design', 'UI Design', 'Product Design', 'Consulting',
+  'Design Systems', 'Front-End Development', 'Workshops',
+  'Design Sprint', 'Interaction Design', 'User Testing',
+  'Usability Testing', 'UX Research', 'Leadership', 'Mentoring', 'No-Code',
+];
+
+const moreSkills = [
+  'Figma', 'Prototyping', 'Wireframing', 'Branding',
+  'Motion Design', 'Accessibility', 'Agile', 'Scrum',
+];
+---
+
+<section id="skills" class="py-20 px-6 reveal">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-8">Skills</h2>
+    <div class="flex flex-wrap gap-3" id="skills-list">
+      {skills.map((skill, i) => (
+        <span class="pill reveal" data-delay={String(i * 30)}>{skill}</span>
+      ))}
+      <button
+        id="show-more-skills"
+        class="pill cursor-pointer hover:bg-white/5"
+      >
+        + More
+      </button>
+    </div>
+    <div id="more-skills" class="hidden flex-wrap gap-3 mt-3">
+      {moreSkills.map((skill, i) => (
+        <span class="pill reveal" data-delay={String(i * 30)}>{skill}</span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById('show-more-skills');
+  const more = document.getElementById('more-skills');
+  btn?.addEventListener('click', () => {
+    more?.classList.toggle('hidden');
+    more?.classList.toggle('flex');
+    if (btn) btn.textContent = more?.classList.contains('hidden') ? '+ More' : '- Less';
+    // Trigger reveal on newly visible items
+    more?.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  });
+</script>

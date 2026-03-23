@@ -1,0 +1,58 @@
+---
+const posts = [
+  {
+    title: 'The Benefits of Using Free Framer Templates',
+    date: 'Sep 5, 2023',
+    image: '/images/blog-1.jpg',
+    slug: 'benefits-of-free-framer-templates',
+  },
+  {
+    title: 'How to Customize Free Framer Templates to Fit Your Brand',
+    date: 'Sep 4, 2023',
+    image: '/images/blog-2.jpg',
+    slug: 'customize-framer-templates',
+  },
+  {
+    title: 'Top 5 Free Framer Templates for Startups',
+    date: 'Sep 3, 2023',
+    image: '/images/blog-3.jpg',
+    slug: 'top-5-framer-templates-startups',
+  },
+];
+---
+
+<section id="blog" class="py-20 px-6 reveal">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-10">Blog</h2>
+    <div class="flex flex-col">
+      {posts.map((post, i) => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="blog-card flex flex-col sm:flex-row items-start sm:items-center gap-6 py-6 border-b border-white/10 reveal"
+          data-delay={String(i * 100)}
+        >
+          <div class="w-full sm:w-32 h-24 rounded-lg overflow-hidden flex-shrink-0">
+            <img
+              src={post.image}
+              alt={post.title}
+              class="w-full h-full object-cover transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <p class="text-sm text-[var(--color-text-muted)] mb-1">{post.date}</p>
+            <h3 class="text-lg font-medium hover:text-white/80 transition-colors">{post.title}</h3>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="flex justify-center mt-10">
+      <a
+        href="/blog"
+        class="btn-primary inline-flex items-center px-6 py-3 bg-white/10 text-white rounded-full text-sm font-medium hover:bg-white/15"
+      >
+        View More
+      </a>
+    </div>
+  </div>
+</section>

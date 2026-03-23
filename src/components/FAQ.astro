@@ -1,0 +1,37 @@
+---
+const faqs = [
+  {
+    question: 'What is your design process?',
+    answer: 'My design process involves deep research into the target audience, competitive analysis, wireframing, prototyping, and iterative user testing. I believe in data-driven decisions and close collaboration with stakeholders throughout every phase.',
+  },
+  {
+    question: 'What tools and software do you use for UX design?',
+    answer: 'I primarily use Figma for design and prototyping, along with tools like Framer for interactive prototypes, Hotjar for analytics, and various testing platforms. My workflow also includes Notion for documentation and Slack for team communication.',
+  },
+  {
+    question: 'How do you measure the success of your UX designs?',
+    answer: 'Success is measured through a combination of quantitative metrics (conversion rates, engagement time, task completion rates) and qualitative feedback (user interviews, satisfaction surveys). I set KPIs at the start of each project and track them throughout.',
+  },
+];
+---
+
+<section id="faq" class="py-20 px-6 reveal">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-light text-[var(--color-text-muted)] mb-10">Frequently asked questions</h2>
+    <div class="flex flex-col">
+      {faqs.map((faq, i) => (
+        <div class="faq-item reveal" data-delay={String(i * 100)}>
+          <button class="faq-trigger w-full flex items-center justify-between py-5 text-left cursor-pointer">
+            <span class="text-lg font-medium pr-8">{faq.question}</span>
+            <svg class="faq-chevron w-5 h-5 flex-shrink-0 text-[var(--color-text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed pb-2">{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

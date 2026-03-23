@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import CTASection from '../../components/CTASection.astro';
+import Footer from '../../components/Footer.astro';
+import { blogPosts } from '../../data/blog-posts';
+
+export function getStaticPaths() {
+  return blogPosts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+// Simple markdown-like rendering
+function renderContent(content: string) {
+  return content
+    .split('\n\n')
+    .map(block => {
+      if (block.startsWith('## ')) {
+        return `<h2 class="text-2xl font-semibold mt-10 mb-4">${block.slice(3)}</h2>`;
+      }
+      if (block.startsWith('**') && block.endsWith('**')) {
+        return `<p class="text-[var(--color-text-secondary)] leading-relaxed mb-4"><strong class="text-white">${block.slice(2, -2)}</strong></p>`;
+      }
+      // Handle paragraphs with bold markers
+      const formatted = block.replace(/\*\*(.+?)\*\*/g, '<strong class="text-white">$1</strong>');
+      return `<p class="text-[var(--color-text-secondary)] leading-relaxed mb-4">${formatted}</p>`;
+    })
+    .join('');
+}
+---
+
+<Layout title={`${post.title} - Paulo Ferreira`}>
+  <Navbar />
+  <main class="pt-28 pb-12 px-6">
+    <article class="max-w-3xl mx-auto">
+      <div class="reveal">
+        <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">{post.title}</h1>
+        <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">{post.excerpt}</p>
+      </div>
+
+      <div class="glass-card overflow-hidden mb-12 reveal" data-delay="200">
+        <img
+          src={post.detailImage}
+          alt={post.title}
+          class="w-full aspect-video object-cover"
+          loading="eager"
+        />
+      </div>
+
+      <div class="prose-custom reveal" data-delay="300" set:html={renderContent(post.content)} />
+
+      <div class="mt-16 pt-8 border-t border-white/10">
+        <a
+          href="/blog"
+          class="btn-primary inline-flex items-center gap-2 px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white/5"
+        >
+          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+    </article>
+    <CTASection />
+  </main>
+  <Footer />
+</Layout>

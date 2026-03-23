@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import CTASection from '../../components/CTASection.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = [
+  {
+    title: 'The Benefits of Using Free Framer Templates',
+    date: 'Sep 5, 2023',
+    image: '/images/blog-1.jpg',
+    slug: 'benefits-of-free-framer-templates',
+  },
+  {
+    title: 'How to Customize Free Framer Templates to Fit Your Brand',
+    date: 'Sep 4, 2023',
+    image: '/images/blog-2.jpg',
+    slug: 'customize-framer-templates',
+  },
+  {
+    title: 'Top 5 Free Framer Templates for Startups',
+    date: 'Sep 3, 2023',
+    image: '/images/blog-3.jpg',
+    slug: 'top-5-framer-templates-startups',
+  },
+  {
+    title: 'How to Choose the Right Free Framer Template for Your Project',
+    date: 'Sep 2, 2023',
+    image: '/images/blog-4.png',
+    slug: 'choose-right-framer-template',
+  },
+  {
+    title: 'The Future of Web Design with Free Framer Templates',
+    date: 'Sep 1, 2023',
+    image: '/images/blog-5.png',
+    slug: 'future-of-web-design-framer',
+  },
+];
+---
+
+<Layout title="Blog - Paulo Ferreira">
+  <Navbar />
+  <main class="pt-28 pb-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-3xl font-light text-[var(--color-text-muted)] mb-10 reveal">Blog</h1>
+      <div class="flex flex-col">
+        {posts.map((post, i) => (
+          <a
+            href={`/blog/${post.slug}`}
+            class="blog-card flex flex-col sm:flex-row items-start sm:items-center gap-6 py-6 border-b border-white/10 reveal"
+            data-delay={String(i * 80)}
+          >
+            <div class="w-full sm:w-32 h-24 rounded-lg overflow-hidden flex-shrink-0">
+              <img
+                src={post.image}
+                alt={post.title}
+                class="w-full h-full object-cover transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <p class="text-sm text-[var(--color-text-muted)] mb-1">{post.date}</p>
+              <h2 class="text-lg font-medium hover:text-white/80 transition-colors">{post.title}</h2>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+    <CTASection />
+  </main>
+  <Footer />
+</Layout>

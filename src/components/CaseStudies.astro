@@ -1,0 +1,78 @@
+---
+const caseStudies = [
+  {
+    title: 'Modernizing a Subscription Management Platform',
+    description: 'With user-centered approach, the goals was to create an intuitive interface for effortless financial management while incorporating gamification.',
+    image: '/images/case-study-1.jpg',
+    stats: [
+      { label: 'Engagement', value: '12', suffix: ' min' },
+      { label: 'User Satisfaction', value: '4.5', suffix: '*' },
+    ],
+  },
+  {
+    title: 'Revamping an E-Commerce Website',
+    description: 'Focus was to create a user-friendly interface that simplified the process of accessing premium operational web scraping proxies.',
+    image: '/images/case-study-2.jpg',
+    stats: [
+      { label: 'Usability', value: '85', suffix: '%' },
+      { label: 'User Retention', value: '70', suffix: '%' },
+    ],
+  },
+  {
+    title: 'Developing a Mobile Health Tracking App',
+    description: 'Leading Bitcoin Data and Stats site. Live price action, monitor on-chain data, and track key economic indicators.',
+    image: '/images/case-study-3.jpg',
+    stats: [
+      { label: 'Conversion Rate', value: '12', suffix: '%' },
+      { label: 'User Satisfaction', value: '4.8', suffix: '*' },
+    ],
+  },
+  {
+    title: 'Optimizing a Corporate Intranet',
+    description: 'An innovative app and approach for taking advantage of unused internet from people\'s devices. It differs from others because of its simplicity, functions, and ways to earn extra money.',
+    image: '/images/case-study-4.jpg',
+    stats: [
+      { label: 'Conversion Rate', value: '20', suffix: '%' },
+      { label: 'User Satisfaction', value: '95', suffix: '%' },
+    ],
+  },
+];
+---
+
+<section id="case-study" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col gap-8">
+    {caseStudies.map((study, i) => (
+      <div class="glass-card p-8 md:p-10 reveal" data-delay={String(i * 100)}>
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <div class="flex-1">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-4 leading-tight">{study.title}</h3>
+            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed max-w-md">{study.description}</p>
+          </div>
+          <div class="flex-1">
+            <img
+              src={study.image}
+              alt={study.title}
+              class="w-full rounded-lg object-cover aspect-video"
+              loading="lazy"
+            />
+            <div class="flex gap-12 mt-6">
+              {study.stats.map(stat => (
+                <div>
+                  <p class="text-sm text-[var(--color-text-secondary)] mb-1">{stat.label}</p>
+                  <p
+                    class="text-3xl md:text-4xl font-bold"
+                    data-counter
+                    data-target={stat.value}
+                    data-suffix={stat.suffix}
+                  >
+                    0{stat.suffix}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

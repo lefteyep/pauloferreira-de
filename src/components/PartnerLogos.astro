@@ -1,0 +1,22 @@
+---
+const partners = [
+  { src: '/images/google-partner.svg', alt: 'Google Partner' },
+  { src: '/images/meta-partner.svg', alt: 'Meta Business Partner' },
+  { src: '/images/linkedin-ads.svg', alt: 'LinkedIn Ads' },
+  { src: '/images/google-partner.svg', alt: 'Google Partner' },
+];
+---
+
+<section class="py-16 px-6 overflow-hidden reveal">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative overflow-hidden">
+      <div class="marquee-track gap-8">
+        {[...partners, ...partners].map(partner => (
+          <div class="flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl px-8 py-5 min-w-[160px] mx-3">
+            <img src={partner.src} alt={partner.alt} class="h-10 w-auto opacity-80" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
